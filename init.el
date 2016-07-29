@@ -16,6 +16,11 @@
 
 (package-initialize)
 
+(require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el")
+(cask-initialize)
+
+(require 'pallet)
+(pallet-mode t)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
@@ -28,7 +33,6 @@
 (defun open-my-init-file ()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-
 
 (require 'popwin)
 (popwin-mode t)

@@ -1,4 +1,5 @@
 auto-save-list/
+.cask/
 recentf
 elpa/
 *~

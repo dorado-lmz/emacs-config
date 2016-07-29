@@ -1,39 +1,4 @@
-(when (> emacs-major-version 24)
-  (add-to-list 'package-archives '("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
-
 (require 'cl)
-
-(defvar lmz/packages '(
-		       company
-		       monokai-theme
-		       hungry-delete
-		       swiper
-		       counsel
-		       smartparens
-		       js2-mode
-		       nodejs-repl
-		       popwin
-		       web-mode
-		       org-pomodoro
-		       evil
-		       evil-leader
-		       window-numbering
-		       powerline
-		       ) "Default packages")
-
-
-
-(defun lmz/packages-installed-p ()
-  (loop for pkg in lmz/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-
-(unless (lmz/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg lmz/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
 
 
 (global-company-mode t)
@@ -47,15 +12,23 @@
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 
+(global-evil-leader-mode)
+(setq evil-leader/leader "<SPC>")
 (evil-mode 1)
 (setcdr evil-insert-state-map nil)
 (define-key evil-insert-state-map [escape] 'evil-normal-state)
 
-(global-evil-leader-mode) 
+
 (evil-leader/set-key
-  "e" 'find-file
-  "b" 'switch-to-buffer
-  "k" 'kill-buffer)
+  "ff" 'find-file
+  "fr" 'recentf-open-files
+  "bb" 'switch-to-buffer
+  "bk" 'kill-buffer
+  "w/" 'split-window-right
+  "w-" 'split-window-below
+  ":" 'counsel-M-x
+  "ee" 'eval-last-sexp 
+  "wm" 'delete-other-windows) 
 
 (window-numbering-mode 1)
 (require 'powerline)
@@ -69,6 +42,15 @@
 	 )
        auto-mode-alist))
 
+(require 'evil-surround)
+(global-evil-surround-mode t)
+
+(evilnc-default-hotkeys)
+(define-key evil-normal-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
+(define-key evil-visual-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
+
+(which-key-mode t)
+(setq which-key-side-window-location 'right) 
 (load-theme 'monokai t)
 (provide 'init-package)
 

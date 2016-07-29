@@ -1,5 +1,3 @@
-(setq mac-option-modifier 'super)
-(setq mac-command-modifier 'meta)
 
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
