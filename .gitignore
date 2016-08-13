@@ -3,5 +3,6 @@ auto-save-list/
 recentf
 elpa/
 *~
-
-
+.DS_Store
+\#*\#
+\#*

@@ -1,4 +1,13 @@
-(global-set-key (kbd "<f2>") 'open-my-init-file)
+(defun open-init-file ()
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+(defun open-my-init-file ()
+  (interactive)
+  (find-file "~/.lmzemacs.d/init.el"))
+
+(global-set-key (kbd "<f2>") 'open-init-file)
+(global-set-key (kbd "<f3>") 'open-my-init-file)
 
 (global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key (kbd "C-h C-v") 'find-variable)

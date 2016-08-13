@@ -1,10 +1,3 @@
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -14,30 +7,39 @@
 ;;(require 'ob-tangle)
 ;;(org-babel-load-file (expand-file-name "lmz.org" user-emacs-directory))
 
-(package-initialize)
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
 
-(require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el")
-(cask-initialize)
+(setq debug-on-error t)
+(defconst spacemacs-emacs-min-version   "24.4" "Minimal version of Emacs.")
 
-(require 'pallet)
-(pallet-mode t)
+(if (not (version<= spacemacs-emacs-min-version emacs-version))
+    (message (concat "Your version of Emacs (%s) is too old. "
+                     "Spacemacs requires Emacs version %s or above.")
+             emacs-version spacemacs-emacs-min-version)
+  (load-file (concat (file-name-directory load-file-name)
+                     "core/core-load-paths.el"))
 
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+  (require 'core-spacemacs)
+  (spacemacs/init)
+  (configuration-layer/sync)
 
-(require 'init-package)
-(require 'init-ui)
-(require 'init-better-defaults)
-(require 'init-keybinding)
-(require 'init-org)
+  (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-(defun open-my-init-file ()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
+  (require 'init-package)
+  (require 'init-ui)
+  (require 'init-better-defaults)
+  (require 'init-keybinding)
+  (require 'init-org)
+  (require 'init-programing)
+  (require 'init-outline)
 
-(require 'popwin)
-(popwin-mode t)
+  (require 'popwin)
+  (popwin-mode t)
 
-(setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
-(put 'dired-find-alternate-file 'disabled nil)
-
-
+  (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
+  (put 'dired-find-alternate-file 'disabled nil)
+)
+(put 'erase-buffer 'disabled nil)

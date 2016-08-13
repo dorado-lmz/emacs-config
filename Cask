@@ -1,5 +1,5 @@
-(source "gnu" "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-(source "melpa" "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+(source "gnu" "http://elpa.zilongshanren.com/gnu/")
+(source "melpa" "http://elpa.zilongshanren.com/melpa/")
 
 (depends-on "alert")
 (depends-on "cask")
@@ -21,6 +21,7 @@
 (depends-on "monokai-theme")
 (depends-on "nodejs-repl")
 (depends-on "org-pomodoro")
+(depends-on "outshine")
 (depends-on "package-build")
 (depends-on "pallet")
 (depends-on "popwin")

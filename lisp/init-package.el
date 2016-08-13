@@ -1,7 +1,5 @@
 (require 'cl)
 
-
-(global-company-mode t)
 (setq company-idle-delay 0.1)
 (setq company-minimum-prefix-length 2)
 (global-hungry-delete-mode)
@@ -22,13 +20,20 @@
 (evil-leader/set-key
   "ff" 'find-file
   "fr" 'recentf-open-files
+  "fj" 'dired-jump
   "bb" 'switch-to-buffer
-  "bk" 'kill-buffer
+  "bd" 'kill-buffer
   "w/" 'split-window-right
   "w-" 'split-window-below
+  "1" 'select-window-1
+  "2" 'select-window-2
+  "3" 'select-window-3
+  "4" 'select-window-4
   ":" 'counsel-M-x
-  "ee" 'eval-last-sexp 
-  "wm" 'delete-other-windows) 
+  "ee" 'eval-last-sexp
+  "wc" 'delete-window
+  "wm" 'delete-other-windows
+  "feR" 'dotspacemacs/sync-configuration-layers)   
 
 (window-numbering-mode 1)
 (require 'powerline)
@@ -39,8 +44,9 @@
        '(
 	 ("\\.js\\'" . js2-mode)
 	 ("\\.html\\'" . web-mode)
+	 ("\\.cl\\'" . lisp-mode)
 	 )
-       auto-mode-alist))
+       auto-mode-alist)) 
 
 (require 'evil-surround)
 (global-evil-surround-mode t)
@@ -50,7 +56,6 @@
 (define-key evil-visual-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
 
 (which-key-mode t)
-(setq which-key-side-window-location 'right) 
-(load-theme 'monokai t)
+(setq which-key-side-window-location 'right)
 (provide 'init-package)
 
