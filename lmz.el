@@ -1,23 +1,13 @@
-** config loadPath
-#+BEGIN_SRC emacs-lisp
+
 (load-file (concat (file-name-directory load-file-name)
                    "core/core-load-paths.el"))
-#+END_SRC
 
-** init spacemacs
-#+BEGIN_SRC emacs-lisp
 (require 'core-spacemacs)
 (spacemacs/init)
-#+END_SRC
 
-** sync packages
-#+BEGIN_SRC emacs-lisp
 (configuration-layer/sync)
 (spacemacs/setup-startup-hook)
-#+END_SRC
 
-** user define 
-#+BEGIN_SRC emacs-lisp
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 (require 'init-package)
@@ -33,7 +23,3 @@
 
 (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 (put 'dired-find-alternate-file 'disabled nil)
-
-#+END_SRC
-
-

@@ -1,6 +1,53 @@
 (defconst dotspacemacs-test-results-buffer "*dotfile-test-results*"
   "Name of the buffer to display dotfile test results.")
 
+(defvar dotspacemacs-distribution 'spacemacs
+  "Base distribution to use. This is a layer contained in the directory
+`+distributions'. For now available distributions are `spacemacs-base'
+or `spacemacs'.")
+
+(defvar dotspacemacs-fullscreen-at-startup nil
+  "If non nil the frame is fullscreen when Emacs starts up (Emacs 24.4+ only).")
+
+(defvar dotspacemacs-fullscreen-use-non-native nil
+  "If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen. Use
+to disable fullscreen animations in OSX.")
+
+(defvar dotspacemacs-large-file-size 1
+  "Size (in MB) above which spacemacs will prompt to open the large file
+literally to avoid performance issues. Opening a file literally means that
+no major mode or minor modes are active.")
+
+(defvar dotspacemacs-auto-save-file-location 'cache
+  "Location where to auto-save files. Possible values are `original' to
+auto-save the file in-place, `cache' to auto-save the file to another
+file stored in the cache directory and `nil' to disable auto-saving.
+Default value is `cache'.")
+
+(defvar dotspacemacs-enable-paste-transient-state t
+  "If non nil the paste transient-state is enabled. While enabled pressing `p`
+several times cycle between the kill ring content.'")
+
+(defvar dotspacemacs-which-key-delay 0.4
+  "Delay in seconds starting from the last keystroke after which
+the which-key buffer will be shown if you have not completed a
+key sequence. Setting this variable is equivalent to setting
+`which-key-idle-delay'.")
+
+(defvar dotspacemacs-which-key-position 'bottom
+  "Location of the which-key popup buffer. Possible choices are bottom,
+right, and right-then-bottom. The last one will display on the
+right if possible and fallback to bottom if not.")
+
+(defvar dotspacemacs-loading-progress-bar t
+  "If non nil a progress bar is displayed when spacemacs is loading. This
+may increase the boot time on some systems and emacs builds, set it to nil
+to boost the loading time.")
+
+(defvar dotspacemacs-maximized-at-startup nil
+  "If non nil the frame is maximized when Emacs starts up (Emacs 24.4+ only).
+Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.")
+
 (defvar dotspacemacs-download-packages 'used
   "Defines the behaviour of Spacemacs when downloading packages.
 Possible values are `used', `used-but-keep-unused' and `all'. `used' will
@@ -9,6 +56,53 @@ their dependencies. `used-but-keep-unused' will download only the used packages
 but won't delete them if they become unused. `all' will download all the
 packages regardless if they are used or not and packages won't be deleted by
 Spacemacs.")
+
+(defvar dotspacemacs-remap-Y-to-y$ nil
+  "If non nil `Y' is remapped to `y$' in Evil states.")
+
+(defvar dotspacemacs-retain-visual-state-on-shift t
+  "If non-nil, the shift mappings `<' and `>' retain visual state
+if used there.")
+
+(defvar dotspacemacs-visual-line-move-text nil
+  "If non-nil, J and K move lines up and down when in visual mode.")
+
+(defvar dotspacemacs-colorize-cursor-according-to-state t
+  "If non nil the cursor color matches the state color in GUI Emacs.")
+
+(defvar dotspacemacs-ex-substitute-global nil
+  "If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.")
+
+(defvar dotspacemacs-persistent-server nil
+  "If non nil advises quit functions to keep server open when quitting.")
+
+(defvar dotspacemacs-folding-method 'evil
+  "Code folding method. Possible values are `evil' and `origami'.")
+
+(defvar dotspacemacs-line-numbers nil
+  "If non nil line numbers are turned on in all `prog-mode' and `text-mode'
+derivatives. If set to `relative', also turns on relative line numbers.")
+
+
+(defvar dotspacemacs-show-transient-state-title t
+  "If non nil show the titles of transient states.")
+
+  (defvar dotspacemacs-show-transient-state-color-guide t
+  "If non nil show the color guide hint for transient state keys.")
+
+(defvar dotspacemacs-mode-line-unicode-symbols t
+  "If non nil unicode symbols are displayed in the mode-line (eg. for lighters)")
+
+(defvar dotspacemacs-smooth-scrolling t
+  "If non nil smooth scrolling (native-scrolling) is enabled.
+Smooth scrolling overrides the default behavior of Emacs which
+recenters point when it reaches the top or bottom of the
+screen.")
+
+;; only for backward compatibility
+(defalias 'dotspacemacs-mode 'emacs-lisp-mode)
+(defvar dotspacemacs-scratch-mode 'text-mode
+  "Default major mode of the scratch buffer.")
 
 (defconst dotspacemacs-directory
   (let* ((env (getenv "SPACEMACSDIR"))
@@ -28,6 +122,14 @@ Spacemacs.")
 SPACEMACSDIR environment variable. If neither of these
 directories exist, this variable will be nil.")
 
+(defvar dotspacemacs-mode-line-unicode-symbols t
+  "If non nil unicode symbols are displayed in the mode-line (eg. for lighters)")
+
+(defmacro dotspacemacs|symbol-value (symbol)
+  "Return the value of SYMBOL corresponding to a dotspacemacs variable.
+If SYMBOL value is `display-graphic-p' then return the result of
+ `(display-graphic-p)', otherwise return the value of the symbol."
+  `(if (eq 'display-graphic-p ,symbol) (display-graphic-p) ,symbol))
 
 
 ;; if .spacemacs exit,use it.if not,use .spacemacs.d/init.el
@@ -49,6 +151,10 @@ exists. Otherwise, fallback to ~/.spacemacs")
 
 (defvar dotspacemacs-configuration-layers '(emacs-lisp)
   "List of configuration layers to load.")
+
+(defvar dotspacemacs-configuration-layer-path '()
+  "List of additional paths where to look for configuration layers.
+Paths must have a trailing slash (ie. `~/.mycontribs/')")
 
 (defvar dotspacemacs-elpa-timeout 5
   "Maximum allowed time in seconds to contact an ELPA repository.")

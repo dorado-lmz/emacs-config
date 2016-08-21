@@ -7,6 +7,15 @@
 (require 'core-configuration-layer)
 (require 'core-fonts-support)
 (require 'core-funcs)
+(require 'core-keybindings)
+(require 'core-transient-state)
+(require 'core-toggle)
+(require 'core-use-package-ext)
+(require 'core-auto-completion)
+(require 'core-display-init)
+
+(defvar spacemacs-post-user-config-hook-run nil
+  "Whether `spacemacs-post-user-config-hook' has been run")
 
 (defun spacemacs/init ()
   ;; explicitly set the prefered coding systems to avoid annoying prompt
@@ -37,5 +46,29 @@
           (mapconcat 'car dotspacemacs-default-font ", ")
         (car dotspacemacs-default-font)))))
 
+(defun spacemacs/defer-until-after-user-config (func)
+  "Call FUNC if dotspacemacs/user-config has been called. Otherwise,
+defer call using `spacemacs-post-user-config-hook'."
+  (if spacemacs-post-user-config-hook-run
+      (funcall func)
+    (add-hook 'spacemacs-post-user-config-hook func)))
+
+(defun spacemacs/setup-startup-hook ()
+  "Add post init processing."
+  (add-hook
+   'emacs-startup-hook
+   (lambda ()
+     ;; Ultimate configuration decisions are given to the user who can defined
+     ;; them in his/her ~/.spacemacs file
+     (dotspacemacs|call-func dotspacemacs/user-config
+                             "Calling dotfile user config...")
+     (run-hooks 'spacemacs-post-user-config-hook)
+     (setq spacemacs-post-user-config-hook-run t)
+     (when (fboundp dotspacemacs-scratch-mode)
+       (with-current-buffer "*scratch*"
+         (funcall dotspacemacs-scratch-mode)))
+     (configuration-layer/display-summary emacs-start-time)
+     ;;(spacemacs/check-for-new-version nil spacemacs-version-check-interval)
+     (setq spacemacs-initialized t))))
 
 (provide 'core-spacemacs)

@@ -6,3 +6,4 @@ elpa/
 .DS_Store
 \#*\#
 \#*
+.cache/
