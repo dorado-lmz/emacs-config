@@ -1,12 +1,30 @@
+(global-auto-revert-mode t)
 
 (global-company-mode t)
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
+
+;;(recentf-mode 1)
+;;(setq recentf-max-menu-items 25)
+
+(setq company-idle-delay 0.1)
+(setq company-minimum-prefix-length 2)
+;;(global-hungry-delete-mode)
+
+
+;;(ivy-mode t)
+;;(setq ivy-use-virtual-buffers t)
+
+;;(require 'smartparens-config)
+;;(smartparens-global-mode t)
+
 (delete-selection-mode t)
+
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+
+(require 'popwin)
+(popwin-mode t)
 
 (put 'dired-find-alternate-file 'disabled nil)
 (with-eval-after-load 'dired
@@ -17,11 +35,11 @@
 ;;					    ("8l" "lllllll")
 ;;					    ))
 
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  (cond ((looking-at-p "\\s(") (funcall fn))
-	 (t (save-excursion
-	      (ignore-errors (backward-up-list))
-	      (funcall fn)))))
+;;(defmacro show-paren-function (:around (fn) fix-show-paren-function)
+;;  (cond ((looking-at-p "\\s(") (funcall fn))
+;;	 (t (save-excursion
+;;	      (ignore-errors (backward-up-list))
+;;	      (funcall fn)))))
 
 (defun indent-buffer ()
   "Indent the currently visited buffer."
@@ -61,7 +79,10 @@
 		  "return links as string\n"))))
     (format "%s" (s-chop-suffix "\"" (s-chop-prefix "\"" result)))))
 
-(require 'dired-x)
+;;(require 'dired-x)
+;;(setq dired-dwim-target t)
 
-(setq dired-dwim-target t) 
+
+
+
 (provide 'init-better-defaults)

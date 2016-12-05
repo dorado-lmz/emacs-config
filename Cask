@@ -1,6 +1,8 @@
-(source "gnu" "http://elpa.zilongshanren.com/gnu/")
-(source "melpa" "http://elpa.zilongshanren.com/melpa/")
+(source "gnu"   "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+(source "melpa" "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
 
+(depends-on "eieio")
+(depends-on "ht")
 (depends-on "ace-window")
 (depends-on "alert")
 (depends-on "anaconda-mode")
@@ -80,3 +82,6 @@
 (depends-on "which-key")
 (depends-on "window-numbering")
 (depends-on "yapfify")
+(depends-on "origami")
+(depends-on "move-text")
+(depends-on "color-theme-sanityinc-solarized")

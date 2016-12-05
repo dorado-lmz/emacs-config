@@ -1,25 +1,11 @@
-(when (memq window-system '(mac ns))
-     (exec-path-from-shell-initialize))
+;;(when (memq window-system '(mac ns))
+;;     (exec-path-from-shell-initialize))
 
-(setq company-idle-delay 0.1)
-(setq company-minimum-prefix-length 2)
-(global-hungry-delete-mode)
-
-(require 'smartparens-config)
-(smartparens-global-mode t)
-
-
-(setq auto-mode-alist
-      (append
-       '(
-	 ("\\.js\\'" . js2-mode)
-	 ("\\.html\\'" . web-mode)
-	 ("\\.cl\\'" . lisp-mode)
-	 )
-       auto-mode-alist))
-
-(require 'js2-refactor)
-(add-hook 'js2-mode #'js2-refactor-mode)
+;;(global-evil-leader-mode)
+;;(setq evil-leader/leader "<SPC>")
+;;(evil-mode 1)
+;;(setcdr evil-insert-state-map nil)
+;;(define-key evil-insert-state-map [escape] 'evil-normal-state)
 
 
 ;;(require 'evil-surround)
@@ -30,6 +16,7 @@
 ;;(define-key evil-visual-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
 
 ;;(which-key-mode t)
-;;(setq which-key-side-window-location 'right)
+;;(setq which-key-side-window-location 'bottom)
+
 (provide 'init-package)
 

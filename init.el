@@ -11,8 +11,9 @@
 ;; You may delete these explanatory comments.
 ;;(package-initialize)
 
+(setq init-file-debug t)
 (setq debug-on-error t)
-(defconst spacemacs-emacs-min-version   "24.4" "Minimal version of Emacs.")
+(defconst spacemacs-emacs-min-version "24.4" "Minimal version of Emacs.")
 
 (if (not (version<= spacemacs-emacs-min-version emacs-version))
     (message (concat "Your version of Emacs (%s) is too old. "

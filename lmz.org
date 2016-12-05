@@ -1,7 +1,30 @@
+
+** cask init
+#+BEGIN_SRC emacs-lisp
+(require 'cask "/usr/local/Cellar/cask/0.8.1/cask.el")
+(cask-initialize)
+#+END_SRC
+
 ** config loadPath
 #+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 (load-file (concat (file-name-directory load-file-name)
-                   "core/core-load-paths.el"))
+                   "lisp/core-load-paths.el"))
+
+#+END_SRC
+
+** user define
+#+BEGIN_SRC emacs-lisp
+
+(require 'init-package)
+(require 'init-ui)
+(require 'init-better-defaults)
+(require 'init-org)
+(require 'init-programing)
+(require 'init-outline)
+(require 'init-keybinding)
+
+(setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 #+END_SRC
 
 ** init spacemacs
@@ -12,28 +35,8 @@
 
 ** sync packages
 #+BEGIN_SRC emacs-lisp
-(configuration-layer/sync)
-(spacemacs/setup-startup-hook)
-#+END_SRC
-
-** user define 
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-
-(require 'init-package)
-(require 'init-ui)
-(require 'init-better-defaults)
-(require 'init-org)
-(require 'init-programing)
-(require 'init-outline)
-(require 'init-keybinding)
-
-(require 'popwin)
-(popwin-mode t)
-
-(setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
-(put 'dired-find-alternate-file 'disabled nil)
-
+;;(configuration-layer/sync)
+;;(spacemacs/setup-startup-hook)
 #+END_SRC
 
 

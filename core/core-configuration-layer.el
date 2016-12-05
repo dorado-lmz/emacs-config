@@ -410,7 +410,7 @@ return both used and unused packages."
     ;; optimization, no need to activate all the packages so early
     (setq package-enable-at-startup nil)
     (package-initialize 'noactivate)
-    (require 'cask "/usr/local/Cellar/cask/0.7.4/cask.el")
+    (require 'cask "/usr/local/Cellar/cask/0.8.1/cask.el")
     (cask-initialize)
     (require 'pallet)
     (pallet-mode t)))

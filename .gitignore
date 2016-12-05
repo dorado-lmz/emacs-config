@@ -7,3 +7,6 @@ elpa/
 \#*\#
 \#*
 .cache/
+lmz.el
+.spacemacs
+smex-items
